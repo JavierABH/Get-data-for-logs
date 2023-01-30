@@ -1,0 +1,14 @@
+;;;;;TestName;Presence Rivet 1;Presence Rivet 2;Presence Rivet 3;Presence Rivet 4
+;;;;;LowLimit;Passed;Passed;Passed;Passed
+;;;;;HighLimit;Passed;Passed;Passed;Passed
+;;;;;Units;;;;
+SN;Date;CycleTime;Nest;Status;FirstFail;;;;
+S230200067;23/01/2023 04:41:23 p. m.;300.65s;1;Failed;UI1 Voltage Input Mode 10V;Passed;Passed;Passed;Passed
+S230200142;23/01/2023 04:46:47 p. m.;624.50s;2;Passed;;Passed;Passed;Passed;Passed
+S230200072;23/01/2023 04:56:03 p. m.;331.19s;1;Passed;;Passed;Passed;Passed;Passed
+S224900538;23/01/2023 05:01:33 p. m.;660.94s;2;Failed;Rotary Address 1 SW1;Passed;Passed;Passed;Passed
+S224900538;23/01/2023 05:15:01 p. m.;337.33s;1;Failed;Rotary Address 1 SW1;Passed;Passed;Passed;Passed
+S224900547;23/01/2023 05:18:56 p. m.;572.79s;2;Failed;Binary Output 2 Led ON;Passed;Passed;Passed;Passed
+S230200067;23/01/2023 05:23:27 p. m.;33.35s;1;Passed;;;;;
+S230200072;23/01/2023 05:23:39 p. m.;44.70s;2;Passed;;;;;
+S230200067;23/01/2023 05:45:06 p. m.;337.88s;1;Failed;Rotary Address 1 SW1;Passed;Passed;Passed;Passed
