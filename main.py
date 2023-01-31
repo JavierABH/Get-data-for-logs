@@ -1,33 +1,30 @@
 import csv
+import os
 import glob
 import pandas as pd
 import numpy as np
 
 logs_path = "data\Results"
-path = "data/sample/test.csv"
 
 def main():
-    for path in glob.iglob(f'{logs_path}/*'):
-        print(path)
+    for path_file in glob.iglob(f'{logs_path}/**', recursive = True):
+        if os.path.isfile(path_file)
+            # Abrir el archivo csv para lectura
+            with open(path, 'r') as f:
+            reader = csv.reader(f)
 
+            # Leer todas las filas en una lista
+            rows = [row for row in reader]
 
+            # Modificar la fila 5
+            rows[4] = rows[4] + [''] * 150
 
+            # Abrir el archivo csv para escritura
+            with open(path, 'w', newline='') as f:
+            writer = csv.writer(f)
 
-    # # Leer el primer dataframe
-    # df1 = pd.read_csv( path, nrows=3, header= 0)
-    # df1 = df1.iloc[:, 5:]
-
-    # # Leer el segundo dataframe
-    # df2 = pd.read_csv( path, header= 4)
-    # df2 = df2[['SN', 'Date', 'CycleTime', 'Status', 'FirstFail']]
-
-    # # Eliminar s de valores"
-    # df2['CycleTime'] = df2['CycleTime'].str.replace('s', '')
-
-    # # Añadir una columna "Measurement" al segundo dataframe
-    # df2['Measurement'] = 0.0
-
-
+            # Escribir todas las filas en el archivo csv
+            writer.writerows(rows)
 
 if __name__ == "__main__":
     main()
