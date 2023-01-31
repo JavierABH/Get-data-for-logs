@@ -5,5 +5,8 @@ from the generated csv file.
 
 import pandas as pd
 
+path = "data/sample/test.csv"
+
 # Leer archivo original en un dataframe de pandas
-df = pd.read_csv("data/sample/input.csv", header = 4)
+df1 = pd.read_csv( path, nrows=3, header= 0)
+df1 = df1.iloc[:, 5:]
