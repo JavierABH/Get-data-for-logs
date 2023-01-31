@@ -4,6 +4,7 @@ from the generated csv file.
 """
 
 import pandas as pd
+import numpy as np
 
 path = "data/sample/test.csv"
 
@@ -14,6 +15,7 @@ df1 = df1.iloc[:, 5:]
 # Leer el segundo dataframe
 df2 = pd.read_csv( path, header= 4)
 df2 = df2[['SN', 'Date', 'CycleTime', 'Status', 'FirstFail']]
+
 # Eliminar s de valores"
 df2['CycleTime'] = df2['CycleTime'].str.replace('s', '')
 
