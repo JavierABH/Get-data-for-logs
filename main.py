@@ -1,9 +1,7 @@
-import csv
 import os
 import glob
-import pandas as pd
-import numpy as np
 from csv_utility import Log
+from tdr import Csv_tdr
 
 # Define the path where the log files are located
 logs_path = "data\Results"
@@ -15,7 +13,8 @@ def main():
         if os.path.isfile(path_file) and "GRR" not in path_file:
             log = Log(path_file)
             log.modify_csv()
-
+            cvs_df = Csv_tdr(path_file)
+            
 
 if __name__ == "__main__":
     main()
