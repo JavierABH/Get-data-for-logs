@@ -28,6 +28,7 @@ class Csv_tdr:
         self.list_Status = self.df_temp["Status"]
         self.list_FirstFail = self.df_temp["FirstFail"]
         self.list_Date = self.list_Datetime.str.split(" ").str[0]
+
         self.df_temp["Measurement"] = float("NaN")
         for i, row in self.df_temp.iterrows():
             if row["Status"] == "Failed":
@@ -37,5 +38,7 @@ class Csv_tdr:
                 # write the value of the measurement in the new column "Measurement"
                 self.df_temp.at[i, "Measurement"] = self.df_temp.iloc[i, measurement_column]
         self.list_Measurement = self.df_temp["Measurement"]
+
+        
 
     
