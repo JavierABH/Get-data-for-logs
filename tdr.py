@@ -40,14 +40,8 @@ class Csv_tdr:
 
     def set_tempdataframe(self):
         self.df_temp = pd.read_csv(self.path, header=4)
-        self.list_SerialNumber = self.df_temp["SN"]
-        self.list_Datetime = self.df_temp["Date"]
-        self.list_Cycletime = self.df_temp["CycleTime"]
-        self.list_Status = self.df_temp["Status"]
-        self.list_FirstFail = self.df_temp["FirstFail"]
-        self.list_Date = self.list_Datetime.str.split(" ").str[0]
-
         self.df_temp["Measurement"] = ""
+        self.df_temp["PartNumber"] = ""
         for i, row in self.df_temp.iterrows():
             if row["Status"] == "Failed":
                 measurement = row["FirstFail"]
@@ -58,10 +52,15 @@ class Csv_tdr:
 
             serial = row["SN"]
             resp, serial_partnumber = connector.CIMP_PartNumberRef(serial,1, serial_partnumber)
-            self.df_temp.at[i, "PartNumber"] = serial_partnumber        
+            self.df_temp.at[i, "PartNumber"] = serial_partnumber  
 
+        self.list_SerialNumber = self.df_temp["SN"]
+        self.list_Datetime = self.df_temp["Date"]
+        self.list_Cycletime = self.df_temp["CycleTime"]
+        self.list_Status = self.df_temp["Status"]
+        self.list_FirstFail = self.df_temp["FirstFail"]
+        self.list_Date = self.list_Datetime.str.split(" ").str[0]
         self.list_Measurement = self.df_temp["Measurement"]
         self.list_PartNumber = self.df_temp["PartNumber"]
-        
 
     
