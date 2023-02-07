@@ -1,3 +1,7 @@
+""" 
+The Module 'csv_utility' modifies the headers of the csv files to be able to insert them in the dataframes.
+"""
+
 import csv
 
 class Log:
