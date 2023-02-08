@@ -8,9 +8,9 @@ logs_path = "data\Results"
 
 def main():
     previus_df = None
-    # Busca los archivos del directorio
+    # Searh files in directory
     for path_file in glob.iglob(f'{logs_path}/**', recursive = True):
-        # Checa si es un archivo y que no sea GRR    
+            
         if os.path.isfile(path_file) and "GRR" not in path_file and ".csv" in path_file:
             print(path_file)
             log = Log(path_file)
