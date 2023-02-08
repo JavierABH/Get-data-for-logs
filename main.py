@@ -7,6 +7,7 @@ from tdr import TdrCsv
 logs_path = "data\Results"
 
 def main():
+    previus_df = None
     # Busca los archivos del directorio
     for path_file in glob.iglob(f'{logs_path}/**', recursive = True):
         # Checa si es un archivo y que no sea GRR    
@@ -15,9 +16,10 @@ def main():
             log = Log(path_file)
             reply_modify = log.modify_csv()
             print("Modify CSV: "+ reply_modify)
-            dataframe = TdrCsv(path_file)
+            dataframe = TdrCsv(path_file, previus_df)
             reply_df = dataframe.set_tempdataframe()
             print("DF: " + reply_df)
+            previus_df = dataframe.df_main
     # create csv
     reply_csv = dataframe.create_csv()
     print("Csv: " + reply_csv)

@@ -23,7 +23,7 @@ from WSConnector import Connector
 connector = Connector()
 
 class TdrCsv:
-    def __init__(self, path) -> None:
+    def __init__(self, path, df_main = None) -> None:
         # Path to the csv file
         self.path = path
         # DataFrame used to temporarily store the csv data
@@ -40,7 +40,10 @@ class TdrCsv:
         self.list_Station = None
         # DataFrame used to store the csv data
         self.df_temp = None
-        self.df_main = None
+        if df_main is None:
+            self.df_main = pd.DataFrame()
+        else:
+            self.df_main = df_main
         # Calling the method to set dataframes
         # self.set_tempdataframe()
 
