@@ -38,4 +38,4 @@ class Log:
                 writer.writerows(rows)
             return "Modify correct"
         except Exception as e:
-            return "Error: " + str(e)
+            return "Error modify: " + str(e)
