@@ -38,6 +38,16 @@ class TdrCsv:
         self.list_FirstFail = None
         self.list_Measurement = None
         self.list_Station = None
+        # Pcb values
+        self.SerialNumber = None
+        self.Datetime = None
+        self.Date = None
+        self.Cycletime = None
+        self.PartNumber = None
+        self.Status = None
+        self.FirstFail = None
+        self.Measurement = None
+        self.Station = None
         # DataFrame used to store the csv data
         self.df_temp = None
         if df_main is None:
@@ -68,13 +78,22 @@ class TdrCsv:
                     # write the value of the measurement in the new column "Measurement"
                     self.df_temp.at[i, "Measurement"] = self.df_temp.iloc[i, measurement_column]
                 # Getting the value of the "SN" (Serial Number) column
-                serial = row["SN"]
+                self.SerialNumber = row["SN"]
                 # If serial is blank, leave partnumber empty
-                if serial != "":
+                if self.SerialNumber != "":
                     # Getting the part number for the serial number
-                    resp, serial_partnumber = connector.CIMP_PartNumberRef(serial,1, serial_partnumber)
+                    resp, serial_partnumber = connector.CIMP_PartNumberRef(self.SerialNumber,1, serial_partnumber)
                     # Writing the part number in the "PartNumber" column
                     self.df_temp.at[i, "PartNumber"] = serial_partnumber 
+                # Getting others pcb values 
+                self.Datetime = row["Date"]
+                self.Date = self.Datetime.split(" ").str[0]
+                self.Cycletime = row["CycleTime"]
+                self.PartNumber = row["PartNumber"]
+                self.Status = row["Status"]
+                self.FirstFail = row["FirstFail"]
+                self.Measurement = row["Measurement"]
+                self.Station = row["Station"]
             # Store the data from the dataframe into separate lists.
             self.list_SerialNumber = self.df_temp["SN"]
             self.list_Datetime = self.df_temp["Date"]
@@ -86,7 +105,7 @@ class TdrCsv:
             # Split the date of the time
             self.df_temp['Only_Date'] = self.df_temp['Date'].str.split(" ").str[0]
             self.list_Date = self.df_temp["Only_Date"]
-
+            # Copy df data to main data 
             self.df_temp = self.df_temp[["Station", "SN", "PartNumber", 'Date', "Only_Date", "CycleTime", "Status", "FirstFail", "Measurement"]]
             self.df_main = self.df_main.append(self.df_temp, ignore_index= True)
             return "DF Correct"
