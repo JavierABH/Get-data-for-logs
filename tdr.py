@@ -85,6 +85,8 @@ class TdrCsv:
             # Store the data from the dataframe into separate lists.
             self.list_SerialNumber = self.df_temp["SN"]
             self.list_Datetime = self.df_temp["Date"]
+            # trim 's' to cycle time
+            self.df_temp['CycleTime'] = self.df_temp['CycleTime'].str.replace('s', '')
             self.list_Cycletime = self.df_temp["CycleTime"]
             self.list_Status = self.df_temp["Status"]
             self.list_FirstFail = self.df_temp["FirstFail"]
@@ -109,8 +111,4 @@ class TdrCsv:
             self.df_main.to_csv(output_path, index=False)
             return "Csv create"
         except Exception as e:
-<<<<<<< HEAD
             return "Error CSV: " + str(e)
-=======
-            return "Error: " + str(e)
->>>>>>> 1657a7792f161dec77769b79d186008e162d24ab
