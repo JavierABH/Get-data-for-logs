@@ -113,7 +113,7 @@ class TdrCsv:
             return "Error: " + str(e)
 
     def create_csv(self):
-        # save the new DataFrame to a new CSV file
+        # save main DataFrame to a new CSV file
         try:
             self.df_main = self.df_main[["Station", "SN", "PartNumber", 'Date', "Only_Date", "CycleTime", "Status", "FirstFail", "Measurement"]]
             self.df_main.to_csv(output_path, index=False)
