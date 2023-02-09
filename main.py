@@ -2,9 +2,16 @@ import os
 import glob
 from csv_utility import Log
 from tdr import TdrCsv
+import configparser
+
+#local modules
+config = configparser.ConfigParser()
+config.read('config\settings.ini')
+# Paths to external DLL files
+logs_path = config["Paths"]["InputLog"]
 
 # Define the path where the log files are located
-logs_path = "data\Results"
+logs_path = "data\Results2"
 
 def main():
     previus_df = None
