@@ -11,7 +11,7 @@ config.read('config\settings.ini')
 logs_path = config["Paths"]["InputLog"]
 
 # Define the path where the log files are located
-logs_path = "data\Results2"
+logs_path = "data\Results"
 
 def main():
     previus_df = None
@@ -25,14 +25,16 @@ def main():
             # print(reply_modify)
             dataframe = TdrCsv(path_file, previus_df)
             reply_df = dataframe.set_tempdataframe()
-            # print(reply_df)
+            print(reply_df)
             previus_df = dataframe.df_main
-            status = dataframe.Status
-            measurement = dataframe.Measurement
-            serial = dataframe.SerialNumber
-            if status == "Failed" and measurement == "Passed":
-                print(serial)
-                print(path_file)
+
+            # For debug
+            # status = dataframe.Status
+            # measurement = dataframe.Measurement
+            # serial = dataframe.SerialNumber
+            # if status == "Failed" and measurement == "Passed":
+            #     print(serial)
+            #     print(path_file)
 
     # create csv
     reply_csv = dataframe.create_csv()

@@ -6,6 +6,7 @@ from the generated csv file.
 import pandas as pd
 import clr
 import configparser
+from datetime import datetime
 
 #local modules
 config = configparser.ConfigParser()
@@ -60,7 +61,8 @@ class TdrCsv:
             self.df_temp["Measurement"] = ""
             self.df_temp["PartNumber"] = ""
             self.df_temp["Station"] = "STA_FNLFUNC172"
-            serial_partnumber = None
+            serial_partnumber = ""
+            date_string = ""
             # Iterating through the rows of the dataframe
             for i, row in self.df_temp.iterrows():
                 # If the row's "Status" value is "Failed"
@@ -76,9 +78,25 @@ class TdrCsv:
                 # If serial is blank, leave partnumber empty
                 if self.SerialNumber != "":
                     # Getting the part number for the serial number
+                    self.SerialNumber = str(self.SerialNumber)
                     resp, serial_partnumber = connector.CIMP_PartNumberRef(self.SerialNumber,1, serial_partnumber)
                     # Writing the part number in the "PartNumber" column
-                    self.df_temp.at[i, "PartNumber"] = serial_partnumber 
+                    self.df_temp.at[i, "PartNumber"] = serial_partnumber
+                # Replace the value in the second column        
+                # #05/01/2023 10:39:11,05/01/2023
+                date_raw = row["Date"]
+                if "a. m." in date_raw:
+                    date_raw = date_raw.replace("a. m.", "AM")
+                    date_string = datetime.strptime(date_raw,'%d/%m/%Y %I:%M:%S %p').strftime("%m/%d/%Y %H:%M:%S")
+                    self.df_temp.at[i, "Date"] = date_string
+                elif "p. m." in date_raw:
+                    date_raw = date_raw.replace("p. m.", "PM")
+                    date_string = datetime.strptime(date_raw,'%d/%m/%Y %I:%M:%S %p').strftime("%m/%d/%Y %H:%M:%S")
+                    self.df_temp.at[i, "Date"] = date_string
+                else:
+                    date_string = datetime.strptime(date_raw,'%d/%m/%Y %H:%M:%S').strftime("%m/%d/%Y %H:%M:%S")
+                    self.df_temp.at[i, "Date"] = date_string
+
                 # For debug
                 self.Status = row["Status"]
                 self.Measurement = self.df_temp.at[i, "Measurement"]
