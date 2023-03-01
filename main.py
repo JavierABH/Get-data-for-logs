@@ -7,11 +7,8 @@ import configparser
 #local modules
 config = configparser.ConfigParser()
 config.read('config\settings.ini')
-# Paths to external DLL files
-logs_path = config["Paths"]["InputLog"]
-
 # Define the path where the log files are located
-logs_path = "data\Results"
+logs_path = config["Paths"]["FolderPath"]
 
 def main():
     previus_df = None
@@ -20,9 +17,9 @@ def main():
             
         if os.path.isfile(path_file) and "GRR" not in path_file and ".csv" in path_file:
             # print(path_file)
-            # log = Log(path_file)
-            # reply_modify = log.modify_csv()
-            # print(reply_modify)
+            log = Log(path_file)
+            reply_modify = log.modify_csv()
+            print(reply_modify)
             dataframe = TdrCsv(path_file, previus_df)
             reply_df = dataframe.set_tempdataframe()
             print(reply_df)

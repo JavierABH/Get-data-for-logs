@@ -1,10 +1,7 @@
 __pycache__/
 
 # folder with the logs
-data/Results
-data/Results.rar
-data/Results2
-data/FCT2 Vectralis (Symbio OM & 700) - Copy.pbix
-data/SOFT simple data.xlsx
-data/SOFTEST.xlsx
-data/Softtest.pbix
+data/Results Vec 1 208
+data/Results Vec Stepper 205
+data/FCT Vectralis 208.pbix
+data/Softtest y stepper.pbix
